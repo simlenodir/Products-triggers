@@ -48,24 +48,23 @@ const CREATE_PRODUCTS =
 `
 const UPDATE_PRODUCT =
 `
- update products set category = $1, product_name = $2, product_price = $3 where product_id = $4
-// update products set 
-//     category = case
-//         when $1 is null
-//             then category
-//                 else $1
-// end,
-//    product_name = case
-//            when $2 is null or $2 = ''
-//                then product_name
-//                    else $2
-// end,
-//      product_price = case
-//            when $3 is null or $3 = 0
-//                then product_price
-//                    else $3
-// end
-// where product_id = $4
+update products set 
+    category = (case
+        when $1 is null
+            then category
+                else $1
+end),
+   product_name = (case
+           when $2 is null or $2 = ''
+               then product_name
+                   else $2
+end),
+     product_price = (case
+           when $3 is null or $3 = 0
+               then product_price
+                   else $3
+end)
+where product_id = $4
 `
 const DELETE_PRODUCT = 
 `
