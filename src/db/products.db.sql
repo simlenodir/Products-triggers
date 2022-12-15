@@ -201,3 +201,34 @@ for each row
 execute procedure deleteProductFn();
 
 DELETE FROM products where product_id = '04420ad6-700d-4725-8737-4f47ee948034';
+
+select 
+    p.product_id,
+    p.product_name,
+    p.product_price,
+    c.category_name
+from
+    products as p
+inner join 
+    categories as c 
+on 
+    p.category = c.category_id;  
+
+udate products set 
+    category = case
+        when $1 is null
+            then category
+                else $1
+end,
+   product_name = case
+           when $2 is null or $2 = ''
+               then product_name
+                   else $2
+end,
+     product_price = case
+           when $3 is null or $3 = 0
+               then product_price
+                   else $3
+end,
+
+
